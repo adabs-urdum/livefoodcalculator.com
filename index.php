@@ -232,7 +232,7 @@
             </div>
           </div>
           <label class="panel__label" for="form__deathChance">
-            <span class="">Wahrscheinlichkeit eines vorzeitigen Todes (Unfall, Krankheit, gefressen usw.) jede Woche</span>
+            <span class="">Wahrscheinlichkeit eines vorzeitigen Todes (Unfall, Krankheit, gefressen usw.) jede Woche für jedes Tier</span>
             <input
               id="formSpecies__deathChance"
               class="panel__formInput"

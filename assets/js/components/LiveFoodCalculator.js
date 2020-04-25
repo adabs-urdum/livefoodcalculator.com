@@ -143,25 +143,28 @@ class LiveFoodCalculator {
           speciesObject.missingGender += 1;
         }
 
-        speciesObject.dead += speciesObject.population.filter(
-          (individual) => individual.isDead
-        ).length;
-        speciesObject.population = speciesObject.population.filter(
-          (individual) => !individual.isDead
-        );
-
         if (
           (speciesObject.extractionMature ||
             speciesObject.extractionPremature) &&
           this.week > speciesObject.extractionStart &&
           speciesObject.population.length
         ) {
+          function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [array[i], array[j]] = [array[j], array[i]];
+            }
+          }
+
           let matures = speciesObject.population.filter(
             (individual) => individual.isMature
           );
+          shuffleArray(matures);
+
           let prematures = speciesObject.population.filter(
             (individual) => !individual.isMature
           );
+          shuffleArray(prematures);
 
           if (speciesObject.extractionMature > matures.length) {
             speciesObject.missingOffspring += 1;
@@ -169,7 +172,12 @@ class LiveFoodCalculator {
           } else {
             speciesObject.fed += speciesObject.extractionMature;
           }
+
           matures = matures.slice(speciesObject.extractionMature);
+          // for (let i = 0; i < speciesObject.extractionMature; i++) {
+          //   const randomKey = Math.round(Math.random() * matures.length);
+          //   matures = mature.slice(randomKey, randomKey + 1);
+          // }
 
           if (speciesObject.extractionPremature > prematures.length) {
             speciesObject.missingOffspring += 1;
@@ -177,10 +185,22 @@ class LiveFoodCalculator {
           } else {
             speciesObject.fed += speciesObject.extractionPremature;
           }
+
           prematures = prematures.slice(speciesObject.extractionPremature);
+          // for (let i = 0; i < speciesObject.extractionPremature; i++) {
+          //   const randomKey = Math.round(Math.random() * prematures.length);
+          //   prematures = prematures.slice(randomKey, randomKey + 1);
+          // }
 
           speciesObject.population = [].concat(matures).concat(prematures);
         }
+
+        speciesObject.dead += speciesObject.population.filter(
+          (individual) => individual.isDead
+        ).length;
+        speciesObject.population = speciesObject.population.filter(
+          (individual) => !individual.isDead
+        );
 
         return speciesObject.population.length ? true : false;
       });
@@ -278,7 +298,7 @@ class LiveFoodCalculator {
             <p class="result__reportRow">
               <span>davon erwachsen:</span> ${adultMales.length}</p>
             <p class="result__reportRow">
-              <span>im Becken gestorben:</span> ${speciesObject.dead}</p>
+              <span>Unerwartet verendet:</span> ${speciesObject.dead}</p>
             <p class="result__reportRow">
               <span>Nachzuchten:</span> ${speciesObject.breeds}</p>
             <p class="result__reportRow ${
