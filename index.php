@@ -80,8 +80,17 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title>Aquarium-Lebendfutter-Zucht-Populations-Simulator</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143821656-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-143821656-3');
+    </script>
   </head>
-  <link rel="stylesheet" href="./dist/css/styles.min.css" />
+  <link rel="stylesheet" href="./dist/css/styles.min.css?v=1" />
   <body>
     <main>
       <header class="header">
@@ -322,16 +331,16 @@
           <p><span class="result__grounded" id="resultText__grounded"></span> der Simulationsdurchgänge sind zu Grunde gegangen und ausgestorben.</p>
           <ul>
             <li>Dieses Setup hat <span id="resultText__weeks"></span> Wochen bestanden.</li>
-            <li>Die maximale Bestand lag bei <span id="resultText__maxPopulation"></span>.</li>
+            <li>Der maximale Bestand lag bei <span id="resultText__maxPopulation"></span>.</li>
             <li>Am Ende der Zeit waren noch <span id="resultText__remaining"></span> übrig.</li>
             <li><span id="resultText__females"></span> Weibchen, <span id="resultText__femalesAdult"></span> davon adult, <span id="resultText__males"></span> Männchen, <span id="resultText__malesAdult"></span> davon adult.</li>
             <li>Das Zeitliche gesegnet, ohne verfüttert zu werden, haben <span id="resultText__dead"></span> Individuen.</li>
             <li>Es gelangen <span id="resultText__offspring"></span> Nachzuchten.</li>
             <li>Während <span id="resultText__missingGender"></span> Wochen gab es keinen Nachwuchs, weil keine adulten Tiere von beiden Geschlechtern zugegen waren.</li>
             <li><span id="resultText__missingOffspring"></span> Wochen gab es zu wenig Ausbeute, um den Bedarf zu decken.</li>
-            <li>Um als Energie für andere Tiere zu dienen, wurden <span id="resultText__fed"></span> der Anlage entnommen</li>
+            <li><span id="resultText__fed"></span> Exemplare endeten als Futter.</li>
           </ul>
-          <p>Sammle mehr Datensätze für ein aussagekräfrigeres Resultat.</p>
+          <h4>Sammle mehr Datensätze für ein aussagekräfrigeres Resultat.</h4>
         </div>
         <div>
           <label class="result__showReportsLabel button" for="showResultReports">Datensätze anzeigen</label>
@@ -339,6 +348,6 @@
         <div id="result__report" class="result__report"></div>
       </section>
     </main>
-    <script src="./dist/js/functions.min.js"></script>
+    <script src="./dist/js/functions.min.js?v=1"></script>
   </body>
 </html>

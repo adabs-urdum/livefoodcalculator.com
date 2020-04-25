@@ -154,7 +154,9 @@ class LiveFoodCalculator {
 
     this.allRuns.forEach((run, runKey) => {
       run.forEach((speciesObject, speciesObjectKey) => {
-        weeksAll += speciesObject.endWeek ? speciesObject.endWeek : this.week;
+        weeksAll += speciesObject[0].endWeek
+          ? speciesObject[0].endWeek
+          : this.week;
 
         if (speciesObjectKey == run.length - 1) {
           endPopulation += speciesObject[0].population.length;
@@ -187,7 +189,9 @@ class LiveFoodCalculator {
       });
     });
 
-    const weeksAverage = weeksAll / (this.weeks.length * this.allRuns.length);
+    const weeksAverage = Math.round(
+      weeksAll / (this.weeks.length * this.allRuns.length)
+    );
     elementWeeks.innerText = weeksAverage;
     elementMaxPopulation.innerText = maxPopulation;
     elementDead.innerText = Math.round(deadAverage / this.allRuns.length);
