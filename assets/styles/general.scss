@@ -58,6 +58,16 @@ h6 {
   @include bs-font-size(20);
 }
 
+p {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 ul,
 li {
   margin: 0;

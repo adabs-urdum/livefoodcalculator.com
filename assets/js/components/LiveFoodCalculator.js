@@ -49,10 +49,14 @@ class LiveFoodCalculator {
       "click",
       this.onFormSpeciesSubmit
     );
+    document
+      .getElementById("formSpecies__timespan")
+      .addEventListener("change", this.onClickClearCanvasButton);
   };
 
   onClickClearCanvasButton = () => {
     document.getElementById("result__report").innerHTML = "";
+    this.allRuns = [];
     this.canvasEngine.reset();
   };
 
@@ -109,14 +113,23 @@ class LiveFoodCalculator {
   renderResultReport = () => {
     const elementWeeks = document.getElementById("resultText__weeks");
     const elementRounds = document.getElementById("resultText__rounds");
+    const elementGrounded = document.getElementById("resultText__grounded");
     const elementMaxPopulation = document.getElementById(
       "resultText__maxPopulation"
     );
     const elementEndPopulation = document.getElementById(
       "resultText__remaining"
     );
+    const elementFed = document.getElementById("resultText__fed");
     const elementOffspring = document.getElementById("resultText__offspring");
+    const elementQuota = document.getElementById("resultText__quota");
     const elementDead = document.getElementById("resultText__dead");
+    const elementMissingGender = document.getElementById(
+      "resultText__missingGender"
+    );
+    const elementMissingOffspring = document.getElementById(
+      "resultText__missingOffspring"
+    );
     const elementFemales = document.getElementById("resultText__females");
     const elementFemalesAdult = document.getElementById(
       "resultText__femalesAdult"
@@ -135,6 +148,9 @@ class LiveFoodCalculator {
     let endPopulationFemale = 0;
     let endPopulationFemaleMature = 0;
     let deadAverage = 0;
+    let missingGender = 0;
+    let grounded = 0;
+    let fed = 0;
 
     this.allRuns.forEach((run, runKey) => {
       run.forEach((speciesObject, speciesObjectKey) => {
@@ -154,8 +170,15 @@ class LiveFoodCalculator {
           endPopulationFemaleMature += speciesObject[0].population.filter(
             (individual) => individual.isFemale && individual.isMature
           ).length;
-          breeds += speciesObject.breeds;
+
+          breeds += parseInt(speciesObject[0].breeds);
           deadAverage += speciesObject[0].dead;
+          missingGender += speciesObject[0].missingGender;
+          fed += speciesObject[0].fed;
+
+          if (!speciesObject[0].population.length) {
+            grounded += 1;
+          }
         }
         maxPopulation =
           maxPopulation < speciesObject[0].maxPopulation
@@ -163,10 +186,20 @@ class LiveFoodCalculator {
             : maxPopulation;
       });
     });
+
     const weeksAverage = weeksAll / (this.weeks.length * this.allRuns.length);
     elementWeeks.innerText = weeksAverage;
     elementMaxPopulation.innerText = maxPopulation;
     elementDead.innerText = Math.round(deadAverage / this.allRuns.length);
+    elementOffspring.innerText = Math.round(breeds / this.allRuns.length);
+    elementMissingOffspring.innerText = Math.round(
+      missingGender / this.allRuns.length
+    );
+    elementMissingGender.innerText = Math.round(
+      missingGender / this.allRuns.length
+    );
+    elementGrounded.innerText = grounded;
+    elementFed.innerText = Math.round(fed / this.allRuns.length);
     elementEndPopulation.innerText = Math.round(
       endPopulation / this.allRuns.length
     );
@@ -182,6 +215,9 @@ class LiveFoodCalculator {
     elementMalesAdult.innerText = Math.round(
       endPopulationMaleMature / this.allRuns.length
     );
+
+    elementQuota.innerText =
+      100 - Math.round((100 / this.allRuns.length) * grounded);
   };
 
   simulateWeeks = () => {

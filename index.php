@@ -93,10 +93,10 @@
       <section class="intro">
         <div class="intro__text">
           <p>
-            Dieser Rechner ist eher zur Unterhaltung gedacht und simuliert auf wissenschaftlich weder fundierte, noch haltbare Art und Weise, wie ein Lebendfutter-Zuchtaufbau verlaufen könnte. Dabei werden Eigenschaften der zu vermehrenden Spezies als Parameter angegeben und der Code simuliert den Zuchtverlauf. Viele Dinge werden nicht berücksichtigt, wie z.B. dass Tiere mal älter, mal weniger alt werden, als ihre Lebenserwartung. In diesem Rechner haben sie ab dem erreichen der Lebenserwartung jede Woche eine 50/50 Chance weiterzuleben. Ich bin weder Mathematiker noch Biologe. Mit mehreren Simulationen kann man vielleicht möglicherweise grobe Tendenzen erkennen, aber es werden dabei keine realen oder zuverlässige Zahlen errechnet.
+            Dieser Rechner ist eher zur Unterhaltung gedacht und simuliert auf wissenschaftlich weder fundierte, noch haltbare Art und Weise, wie ein Lebendfutter-Zuchtaufbau verlaufen könnte. Dabei werden Eigenschaften der zu vermehrenden Spezies als Parameter angegeben und der Code simuliert den Zuchtverlauf. Viele Dinge werden nicht berücksichtigt, wie z.B. dass Tiere mal älter, mal weniger alt werden, als ihre Lebenserwartung. In diesem Rechner haben sie ab dem Erreichen der Lebenserwartung jede Woche eine 50/50 Chance weiterzuleben. Ich bin weder Mathematiker noch Biologe. Mit mehreren Simulationen kann man höchstens grobe Tendenzen erkennen, aber es werden dabei keine realen oder zuverlässige Zahlen errechnet.
           </p>
           <p>
-            Deinem Prozessor zuliebe werden Simulationen ab einer Populationsgrösse von 1500 abgebrochen.
+            Deinem Prozessor und der Ladezeit zuliebe werden Simulationen ab einer Populationsgrösse von 1500 abgebrochen.
           </p>
         </div>
       </section>
@@ -316,18 +316,20 @@
         </div>
         <input class="result__showReports" type="checkbox" id="showResultReports">
         <div id="resultReport" class="result__text">
-          <h3>Bericht</h3>
-          <p>Dieser Bericht setzt sich aus den Durchschnittswerten von <span id="resultText__rounds">XXX</span> Durchgängen zusammen.</p>
+          <h3>Analyse</h3>
+          <h4><span id="resultText__quota"></span>% Erfolgsquote</h4>
+          <p>Dieser Bericht setzt sich aus den Durchschnittswerten von <span id="resultText__rounds"></span> Durchgängen zusammen.</p>
+          <p><span class="result__grounded" id="resultText__grounded"></span> der Simulationsdurchgänge sind zu Grunde gegangen und ausgestorben.</p>
           <ul>
-            <li>Dieses Setup hat <span id="resultText__weeks">XXX</span> Wochen bestanden.</li>
-            <li>Die maximale Bestand lag bei <span id="resultText__maxPopulation">XXX</span>.</li>
-            <li>Am Ende der Zeit waren noch <span id="resultText__remaining">XXX</span> übrig.</li>
-            <li><span id="resultText__females">XXX</span> Weibchen, <span id="resultText__femalesAdult">XXX</span> davon adult, <span id="resultText__males">XXX</span> Männchen, <span id="resultText__malesAdult">XXX</span> davon adult.</li>
-            <li>Das Zeitliche gesegnet, ohne verfüttert zu werden, haben <span id="resultText__dead">XXX</span> Individuen.</li>
-            <li>Es gelangen <span id="resultText__offspring">XXX</span> Nachzuchten.</li>
-            <li><span id="resultText__missingGender">XXX</span> Wochen lang gab es keinen Nachwuchs, weil keine adulten Tiere von beiden Geschlechtern zugegen waren.</li>
-            <li><span id="resultText__missingOffspring">XXX</span> Wochen gab es zu wenig Ausbeute, um den Bedarf zu decken.</li>
-            <li>Um als Energie für andere Tiere zu dienen, wurden <span id="resultText__fed">XXX</span> der Anlage entnommen</li>
+            <li>Dieses Setup hat <span id="resultText__weeks"></span> Wochen bestanden.</li>
+            <li>Die maximale Bestand lag bei <span id="resultText__maxPopulation"></span>.</li>
+            <li>Am Ende der Zeit waren noch <span id="resultText__remaining"></span> übrig.</li>
+            <li><span id="resultText__females"></span> Weibchen, <span id="resultText__femalesAdult"></span> davon adult, <span id="resultText__males"></span> Männchen, <span id="resultText__malesAdult"></span> davon adult.</li>
+            <li>Das Zeitliche gesegnet, ohne verfüttert zu werden, haben <span id="resultText__dead"></span> Individuen.</li>
+            <li>Es gelangen <span id="resultText__offspring"></span> Nachzuchten.</li>
+            <li>Während <span id="resultText__missingGender"></span> Wochen gab es keinen Nachwuchs, weil keine adulten Tiere von beiden Geschlechtern zugegen waren.</li>
+            <li><span id="resultText__missingOffspring"></span> Wochen gab es zu wenig Ausbeute, um den Bedarf zu decken.</li>
+            <li>Um als Energie für andere Tiere zu dienen, wurden <span id="resultText__fed"></span> der Anlage entnommen</li>
           </ul>
           <p>Sammle mehr Datensätze für ein aussagekräfrigeres Resultat.</p>
         </div>

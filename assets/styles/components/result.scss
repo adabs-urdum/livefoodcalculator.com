@@ -162,6 +162,18 @@
     background: $White;
     padding: $BS * 32;
     margin-bottom: $BS * 32;
+
+    span {
+      font-weight: 700;
+    }
+
+    li {
+      margin-bottom: $BS * 32;
+    }
+  }
+
+  &__grounded {
+    color: red;
   }
 }
 
@@ -207,6 +219,15 @@
         @include bs-font-size-max(36);
       }
     }
+
+    &__text {
+      padding: 32px;
+      margin-bottom: 32px;
+
+      li {
+        margin-bottom: 32px;
+      }
+    }
   }
 }
 
@@ -247,6 +268,15 @@
 
       &--name {
         @include bs-font-size-l(36);
+      }
+    }
+
+    &__text {
+      padding: $LBS * 32;
+      margin-bottom: $LBS * 32;
+
+      li {
+        margin-bottom: $LBS * 32;
       }
     }
   }
@@ -293,6 +323,15 @@
 
       &--name {
         @include bs-font-size-m(36);
+      }
+    }
+
+    &__text {
+      padding: $MBS * 32;
+      margin-bottom: $MBS * 32;
+
+      li {
+        margin-bottom: $MBS * 32;
       }
     }
   }
@@ -344,6 +383,15 @@
         @include bs-font-size-s(36);
       }
     }
+
+    &__text {
+      padding: $SBS * 32;
+      margin-bottom: $SBS * 32;
+
+      li {
+        margin-bottom: $SBS * 32;
+      }
+    }
   }
 }
 
@@ -387,6 +435,15 @@
 
       &--name {
         @include bs-font-size-xs(36);
+      }
+    }
+
+    &__text {
+      padding: $XSBS * 32;
+      margin-bottom: $XSBS * 32;
+
+      li {
+        margin-bottom: $XSBS * 32;
       }
     }
   }
