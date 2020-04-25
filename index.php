@@ -5,6 +5,8 @@
       'transitionalTime' => 3,
       'wearingTime' => 4,
       'litterSize' => 15,
+      'litterSizeFrom' => 15,
+      'litterSizeTo' => 40,
       'sexualMaturity' => 12,
       'lifeSpan' => 72,
       'deathChance' => 2,
@@ -14,6 +16,8 @@
       'transitionalTime' => 3,
       'wearingTime' => 4,
       'litterSize' => 15,
+      'litterSizeFrom' => 15,
+      'litterSizeTo' => 40,
       'sexualMaturity' => 12,
       'lifeSpan' => 72,
       'deathChance' => 2,
@@ -23,6 +27,8 @@
       'transitionalTime' => 0,
       'wearingTime' => 1,
       'litterSize' => 15,
+      'litterSizeFrom' => 15,
+      'litterSizeTo' => 15,
       'sexualMaturity' => 6,
       'lifeSpan' => 16,
       'deathChance' => 1,
@@ -32,6 +38,8 @@
       'transitionalTime' => 1,
       'wearingTime' => 1,
       'litterSize' => 10,
+      'litterSizeFrom' => 10,
+      'litterSizeTo' => 10,
       'sexualMaturity' => 6,
       'lifeSpan' => 72,
       'deathChance' => 1,
@@ -41,6 +49,8 @@
       'transitionalTime' => 2,
       'wearingTime' => 4,
       'litterSize' => 10,
+      'litterSizeFrom' => 10,
+      'litterSizeTo' => 10,
       'sexualMaturity' => 24,
       'lifeSpan' => 52,
       'deathChance' => 2,
@@ -50,6 +60,8 @@
       'transitionalTime' => 4,
       'wearingTime' => 4,
       'litterSize' => 10,
+      'litterSizeFrom' => 10,
+      'litterSizeTo' => 10,
       'sexualMaturity' => 12,
       'lifeSpan' => 52,
       'deathChance' => 1,
@@ -81,7 +93,10 @@
       <section class="intro">
         <div class="intro__text">
           <p>
-            Dieser Rechner ist wissenschaftlich nicht haltbar. Ich bin weder Mathematiker noch Ichthyologe. Mit mehreren Simulationen kann man möglicherweise grobe Tendenzen erkennen, aber es werden dabei keine realen oder zuverlässige Zahlen errechnet. Dem Prozessor zuliebe werden Simulationen ab einer Population von 1500 abgebrochen.
+            Dieser Rechner ist eher zur Unterhaltung gedacht und simuliert auf wissenschaftlich weder fundierte, noch haltbare Art und Weise, wie ein Lebendfutter-Zuchtaufbau verlaufen könnte. Dabei werden Eigenschaften der zu vermehrenden Spezies als Parameter angegeben und der Code simuliert den Zuchtverlauf. Viele Dinge werden nicht berücksichtigt, wie z.B. dass Tiere mal älter, mal weniger alt werden, als ihre Lebenserwartung. In diesem Rechner haben sie ab dem erreichen der Lebenserwartung jede Woche eine 50/50 Chance weiterzuleben. Ich bin weder Mathematiker noch Biologe. Mit mehreren Simulationen kann man vielleicht möglicherweise grobe Tendenzen erkennen, aber es werden dabei keine realen oder zuverlässige Zahlen errechnet.
+          </p>
+          <p>
+            Deinem Prozessor zuliebe werden Simulationen ab einer Populationsgrösse von 1500 abgebrochen.
           </p>
         </div>
       </section>
@@ -136,14 +151,22 @@
                 />
                 <span class="panel__unit">Wochen</span>
               </label>
-              <label class="panel__label" for="form__litterSize">
-                <span class="panel__labelText">Wurfgrösse/Gelegegrösse</span>
+              <label class="panel__label" for="form__litterSizeFrom">
+                <span class="panel__labelText">Wurfgrösse/Gelegegrösse von</span>
                 <input
-                  id="formSpecies__litterSize"
+                  id="formSpecies__litterSizeFrom"
                   class="panel__formInput"
                   type="number"
-                  value="<?= $presets[$presetKey]['litterSize'] ?>"
-                  name="litterSize"
+                  value="<?= $presets[$presetKey]['litterSizeFrom'] ?>"
+                  name="litterSizeFrom"
+                />
+                <span class="">bis</span>
+                <input
+                  id="formSpecies__litterSizeTo"
+                  class="panel__formInput"
+                  type="number"
+                  value="<?= $presets[$presetKey]['litterSizeTo'] ?>"
+                  name="litterSizeTo"
                 />
               </label>
               <label class="panel__label" for="form__sexualMaturity">
@@ -201,7 +224,7 @@
                   id="formSpecies__extractionStart"
                   class="panel__formInput"
                   type="number"
-                  value="8"
+                  value="12"
                   name="extractionStart"
                 />
                 <span class="panel__unit">Wochen Vorlaufzeit</span>
@@ -214,7 +237,7 @@
                   id="formSpecies__extractionPremature"
                   class="panel__formInput"
                   type="number"
-                  value="28"
+                  value="20"
                   name="extractionPremature"
                 />
                 <span class="panel__unit">Jungtiere pro Woche</span>
@@ -248,7 +271,7 @@
               id="formSpecies__timespan"
               class="panel__formInput"
               type="number"
-              value="52"
+              value="104"
               name="timespan"
             />
             Wochen
@@ -279,13 +302,38 @@
       </section>
       <section class="result">
         <h3>Populationskurve</h3>
-        <span id="result__clearCanvas" class="result__clearCanvas button">leeren</span>
-        <canvas
-          id="result"
-          class="result__canvas"
-          width="1600"
-          height="500"
-        ></canvas>
+        <div class="result__canvasWrapper">
+          <div class="result__canvasControls">
+            <button class="button" id="buttonRunSimulation">simulieren</button>
+            <span id="result__clearCanvas" class="result__clearCanvas button">reset</span>
+          </div>
+          <canvas
+            id="result"
+            class="result__canvas"
+            width="1600"
+            height="500"
+          ></canvas>
+        </div>
+        <input class="result__showReports" type="checkbox" id="showResultReports">
+        <div id="resultReport" class="result__text">
+          <h3>Bericht</h3>
+          <p>Dieser Bericht setzt sich aus den Durchschnittswerten von <span id="resultText__rounds">XXX</span> Durchgängen zusammen.</p>
+          <ul>
+            <li>Dieses Setup hat <span id="resultText__weeks">XXX</span> Wochen bestanden.</li>
+            <li>Die maximale Bestand lag bei <span id="resultText__maxPopulation">XXX</span>.</li>
+            <li>Am Ende der Zeit waren noch <span id="resultText__remaining">XXX</span> übrig.</li>
+            <li><span id="resultText__females">XXX</span> Weibchen, <span id="resultText__femalesAdult">XXX</span> davon adult, <span id="resultText__males">XXX</span> Männchen, <span id="resultText__malesAdult">XXX</span> davon adult.</li>
+            <li>Das Zeitliche gesegnet, ohne verfüttert zu werden, haben <span id="resultText__dead">XXX</span> Individuen.</li>
+            <li>Es gelangen <span id="resultText__offspring">XXX</span> Nachzuchten.</li>
+            <li><span id="resultText__missingGender">XXX</span> Wochen lang gab es keinen Nachwuchs, weil keine adulten Tiere von beiden Geschlechtern zugegen waren.</li>
+            <li><span id="resultText__missingOffspring">XXX</span> Wochen gab es zu wenig Ausbeute, um den Bedarf zu decken.</li>
+            <li>Um als Energie für andere Tiere zu dienen, wurden <span id="resultText__fed">XXX</span> der Anlage entnommen</li>
+          </ul>
+          <p>Sammle mehr Datensätze für ein aussagekräfrigeres Resultat.</p>
+        </div>
+        <div>
+          <label class="result__showReportsLabel button" for="showResultReports">Datensätze anzeigen</label>
+        </div>
         <div id="result__report" class="result__report"></div>
       </section>
     </main>

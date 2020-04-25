@@ -9,8 +9,10 @@ class Species {
     this.startPremature = parseInt(setup.startPremature);
     this.missingGender = 0;
     this.missingOffspring = 0;
+    this.maxPopulation = 0;
     this.fed = 0;
     this.endWeek = null;
+    this.breeds = 0;
     this.extractionStart = setup.extractionStart
       ? parseInt(setup.extractionStart)
       : 0;
@@ -22,7 +24,10 @@ class Species {
       ? parseInt(setup.transitionalTime)
       : 0;
     this.wearingTime = setup.wearingTime ? parseInt(setup.wearingTime) : 0;
-    this.litterSize = setup.litterSize ? parseInt(setup.litterSize) : 0;
+    this.litterSizeFrom = setup.litterSizeFrom
+      ? parseInt(setup.litterSizeFrom)
+      : 0;
+    this.litterSizeTo = setup.litterSizeTo ? parseInt(setup.litterSizeTo) : 0;
     this.sexualMaturity = setup.sexualMaturity
       ? parseInt(setup.sexualMaturity)
       : 0;
@@ -35,7 +40,7 @@ class Species {
     );
 
     this.maxYoungsters = this.getRoundedNumber(
-      this.maxCycles * this.litterSize,
+      this.maxCycles * this.litterSizeTo,
       0
     );
 

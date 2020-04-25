@@ -1,5 +1,6 @@
 import Species from "./Species";
 import CanvasEngine from "./CanvasEngine";
+import ColorGenerator from "./ColorGenerator";
 
 class LiveFoodCalculator {
   constructor() {
@@ -7,8 +8,13 @@ class LiveFoodCalculator {
     this.formSpecies = document.getElementById("formSpecies");
     this.species = [...document.getElementsByClassName("panel__species")];
     this.clearCanvasButton = document.getElementById("result__clearCanvas");
+    this.buttonRunSimulation = document.getElementById("buttonRunSimulation");
+    this.resultReport = document.getElementById("resultReport");
+
     this.speciesObjects = [];
+    this.allRuns = [];
     this.week = 0;
+    this.colorGenerator = new ColorGenerator();
     this.weeksMax = parseInt(
       document.getElementById("formSpecies__timespan").value
     );
@@ -39,6 +45,10 @@ class LiveFoodCalculator {
       "click",
       this.onClickClearCanvasButton
     );
+    this.buttonRunSimulation.addEventListener(
+      "click",
+      this.onFormSpeciesSubmit
+    );
   };
 
   onClickClearCanvasButton = () => {
@@ -59,7 +69,10 @@ class LiveFoodCalculator {
           ).value,
           wearingTime: document.getElementById("formSpecies__wearingTime")
             .value,
-          litterSize: document.getElementById("formSpecies__litterSize").value,
+          litterSizeFrom: document.getElementById("formSpecies__litterSizeFrom")
+            .value,
+          litterSizeTo: document.getElementById("formSpecies__litterSizeTo")
+            .value,
           sexualMaturity: document.getElementById("formSpecies__sexualMaturity")
             .value,
           lifeSpan: document.getElementById("formSpecies__lifeSpan").value,
@@ -90,6 +103,85 @@ class LiveFoodCalculator {
     this.simulateWeeks();
     this.renderCanvas();
     this.renderOverview();
+    this.renderResultReport();
+  };
+
+  renderResultReport = () => {
+    const elementWeeks = document.getElementById("resultText__weeks");
+    const elementRounds = document.getElementById("resultText__rounds");
+    const elementMaxPopulation = document.getElementById(
+      "resultText__maxPopulation"
+    );
+    const elementEndPopulation = document.getElementById(
+      "resultText__remaining"
+    );
+    const elementOffspring = document.getElementById("resultText__offspring");
+    const elementDead = document.getElementById("resultText__dead");
+    const elementFemales = document.getElementById("resultText__females");
+    const elementFemalesAdult = document.getElementById(
+      "resultText__femalesAdult"
+    );
+    const elementMales = document.getElementById("resultText__males");
+    const elementMalesAdult = document.getElementById("resultText__malesAdult");
+
+    elementRounds.innerText = this.allRuns.length;
+
+    let breeds = 0;
+    let weeksAll = 0;
+    let maxPopulation = 0;
+    let endPopulation = 0;
+    let endPopulationMale = 0;
+    let endPopulationMaleMature = 0;
+    let endPopulationFemale = 0;
+    let endPopulationFemaleMature = 0;
+    let deadAverage = 0;
+
+    this.allRuns.forEach((run, runKey) => {
+      run.forEach((speciesObject, speciesObjectKey) => {
+        weeksAll += speciesObject.endWeek ? speciesObject.endWeek : this.week;
+
+        if (speciesObjectKey == run.length - 1) {
+          endPopulation += speciesObject[0].population.length;
+          endPopulationMale += speciesObject[0].population.filter(
+            (individual) => !individual.isFemale
+          ).length;
+          endPopulationMaleMature += speciesObject[0].population.filter(
+            (individual) => !individual.isFemale && individual.isMature
+          ).length;
+          endPopulationFemale += speciesObject[0].population.filter(
+            (individual) => individual.isFemale
+          ).length;
+          endPopulationFemaleMature += speciesObject[0].population.filter(
+            (individual) => individual.isFemale && individual.isMature
+          ).length;
+          breeds += speciesObject.breeds;
+          deadAverage += speciesObject[0].dead;
+        }
+        maxPopulation =
+          maxPopulation < speciesObject[0].maxPopulation
+            ? speciesObject[0].maxPopulation
+            : maxPopulation;
+      });
+    });
+    const weeksAverage = weeksAll / (this.weeks.length * this.allRuns.length);
+    elementWeeks.innerText = weeksAverage;
+    elementMaxPopulation.innerText = maxPopulation;
+    elementDead.innerText = Math.round(deadAverage / this.allRuns.length);
+    elementEndPopulation.innerText = Math.round(
+      endPopulation / this.allRuns.length
+    );
+    elementFemales.innerText = Math.round(
+      endPopulationFemale / this.allRuns.length
+    );
+    elementFemalesAdult.innerText = Math.round(
+      endPopulationFemaleMature / this.allRuns.length
+    );
+    elementMales.innerText = Math.round(
+      endPopulationMale / this.allRuns.length
+    );
+    elementMalesAdult.innerText = Math.round(
+      endPopulationMaleMature / this.allRuns.length
+    );
   };
 
   simulateWeeks = () => {
@@ -134,7 +226,14 @@ class LiveFoodCalculator {
             );
 
             if (newYounglings) {
-              speciesObject.addToPopulation(speciesObject.litterSize, false, 0);
+              const amount =
+                speciesObject.litterSizeFrom +
+                Math.round(
+                  Math.random(
+                    speciesObject.litterSizeTo - speciesObject.litterSizeFrom
+                  )
+                );
+              speciesObject.addToPopulation(amount, false, 0);
             }
           }
         });
@@ -174,10 +273,6 @@ class LiveFoodCalculator {
           }
 
           matures = matures.slice(speciesObject.extractionMature);
-          // for (let i = 0; i < speciesObject.extractionMature; i++) {
-          //   const randomKey = Math.round(Math.random() * matures.length);
-          //   matures = mature.slice(randomKey, randomKey + 1);
-          // }
 
           if (speciesObject.extractionPremature > prematures.length) {
             speciesObject.missingOffspring += 1;
@@ -187,10 +282,6 @@ class LiveFoodCalculator {
           }
 
           prematures = prematures.slice(speciesObject.extractionPremature);
-          // for (let i = 0; i < speciesObject.extractionPremature; i++) {
-          //   const randomKey = Math.round(Math.random() * prematures.length);
-          //   prematures = prematures.slice(randomKey, randomKey + 1);
-          // }
 
           speciesObject.population = [].concat(matures).concat(prematures);
         }
@@ -202,11 +293,18 @@ class LiveFoodCalculator {
           (individual) => !individual.isDead
         );
 
+        speciesObject.maxPopulation =
+          speciesObject.population.length > speciesObject.maxPopulation
+            ? speciesObject.population.length
+            : speciesObject.maxPopulation;
+
         return speciesObject.population.length ? true : false;
       });
 
       this.weeks.push(JSON.parse(JSON.stringify(this.speciesObjects)));
     }
+
+    this.allRuns.push(this.weeks);
   };
 
   renderCanvas = () => {
@@ -215,21 +313,18 @@ class LiveFoodCalculator {
     const maxPopulations = [];
     this.weeks.forEach((week) => {
       week.forEach((speciesObject, speciesObjectKey) => {
-        if (speciesObjectKey in maxPopulations) {
-          if (
-            maxPopulations[speciesObjectKey] > speciesObject.population.length
-          ) {
-            return;
-          }
-        }
-        maxPopulations[speciesObjectKey] = speciesObject.population.length;
+        maxPopulations[speciesObjectKey] = speciesObject.maxPopulation;
       });
     });
 
     this.canvasEngine.ctx.beginPath();
+    this.canvasEngine.ctx.strokeStyle = this.colorGenerator.rgbToHex(
+      this.colorGenerator.colors[this.colorGenerator.currentColorKey]
+    );
+    this.colorGenerator.currentColorKey = Math.round(
+      Math.random() * this.colorGenerator.colors.length
+    );
 
-    this.canvasEngine.ctx.strokeStyle =
-      "#" + (((1 << 24) * Math.random()) | 0).toString(16);
     this.canvasEngine.ctx.moveTo(0, canvasHeight);
 
     this.weeks.forEach((week, weekKey) => {
@@ -245,8 +340,7 @@ class LiveFoodCalculator {
           x: steps.x * weekNumber,
           y:
             canvasHeight -
-            (canvasHeight / maxPopulations[speciesObjectKey]) *
-              speciesObject.population.length,
+            (canvasHeight / 500) * speciesObject.population.length,
         });
       });
     });
@@ -289,6 +383,9 @@ class LiveFoodCalculator {
                 ? "result__reportRow--bad"
                 : ""
             }"><span>Population:</span> ${speciesObject.population.length}</p>
+            <p class="result__reportRow"><span>Max. Population:</span> ${
+              speciesObject.maxPopulation
+            }</p>
             <p class="result__reportRow">
               <span>Weibchen:</span> ${females.length}</p>
             <p class="result__reportRow">
@@ -314,7 +411,7 @@ class LiveFoodCalculator {
                 ? "result__reportRow--bad"
                 : ""
             }">
-              <span>Wochen mit zu wenig Futtertieren:</span> ${
+              <span>Wochen mit zu weniger Ertrag, als gebraucht:</span> ${
                 speciesObject.missingOffspring
               }</p>
             <p class="result__reportRow">

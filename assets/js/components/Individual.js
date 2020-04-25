@@ -22,7 +22,9 @@ class Individual {
 
   checkIfDead = (lifeSpan, deathChance) => {
     if (this.age > lifeSpan) {
-      this.isDead = true;
+      if (Math.round(Math.random())) {
+        this.isDead = true;
+      }
     }
 
     if (Math.round(Math.random() * 100) < deathChance) {
@@ -40,7 +42,10 @@ class Individual {
           return true;
         }
       } else {
-        if (this.progressTransitionalTime >= transitionalTime) {
+        if (
+          this.progressTransitionalTime >= transitionalTime &&
+          Math.random() > 0.4
+        ) {
           this.isPregnant = true;
           this.progressTransitionalTime = 0;
         } else {

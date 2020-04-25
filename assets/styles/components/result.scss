@@ -2,15 +2,66 @@
   display: flex;
   flex-direction: column;
 
+  &__canvasWrapper {
+    position: relative;
+    margin-bottom: 128 * $BS;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $BS * 15;
+      height: 4px;
+      background: $Yellow;
+      box-shadow:
+        0 $BS * 574 0 $Yellow,
+        0 $BS * 574 / 5 * 4 0 $Yellow,
+        0 $BS * 574 / 5 * 3 0 $Yellow,
+        0 $BS * 574 / 5 * 2 0 $Yellow,
+        0 $BS * 574 / 5 * 1 0 $Yellow,
+        0 0 0 $Yellow;
+      transform: translateY(-2px);
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: $BS * 15;
+      width: 4px;
+      background: $Yellow;
+      box-shadow:
+        0 0 0 $Yellow,
+        $BS*1836 / 10 * 1 0 0 $Yellow,
+        $BS*1836 / 10 * 2 0 0 $Yellow,
+        $BS*1836 / 10 * 3 0 0 $Yellow,
+        $BS*1836 / 10 * 4 0 0 $Yellow,
+        $BS*1836 / 10 * 5 0 0 $Yellow,
+        $BS*1836 / 10 * 6 0 0 $Yellow,
+        $BS*1836 / 10 * 7 0 0 $Yellow,
+        $BS*1836 / 10 * 8 0 0 $Yellow,
+        $BS*1836 / 10 * 9 0 0 $Yellow,
+        $BS*1836 0 0 $Yellow;
+      transform: translateX(-2px);
+    }
+  }
+
   &__canvas {
     width: 100%;
-    margin-bottom: $BS * 32;
     background: $White;
   }
 
-  &__clearCanvas {
+  &__canvasControls {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
     transform: translateY(100%);
-    align-self: flex-end;
+    width: 100%;
+    z-index: 2;
   }
 
   &__report {
@@ -18,6 +69,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     margin-top: $BS * 32;
+    display: none;
   }
 
   &__weekWrapper {
@@ -85,6 +137,32 @@
       margin-bottom: 0;
     }
   }
+
+  &__showReports {
+    display: none;
+
+    &:checked {
+      &~.result__report {
+        display: flex;
+      }
+
+      &~div {
+        label[for="showResultReports"] {
+          background: $YellowDark;
+
+          &:hover {
+            color: $Yellow;
+          }
+        }
+      }
+    }
+  }
+
+  &__text {
+    background: $White;
+    padding: $BS * 32;
+    margin-bottom: $BS * 32;
+  }
 }
 
 @media #{$BreakpointMAX
@@ -93,8 +171,8 @@
 
   {
   .result {
-    &__canvas {
-      margin-bottom: 32px;
+    &__canvasWrapper {
+      margin-bottom: 128px;
     }
 
     &__report {
@@ -134,8 +212,8 @@
 
 @media #{$BreakpointL} {
   .result {
-    &__canvas {
-      margin-bottom: 32 * $LBS;
+    &__canvasWrapper {
+      margin-bottom: 128 * $LBS;
     }
 
     &__report {
@@ -176,8 +254,8 @@
 
 @media #{$BreakpointM} {
   .result {
-    &__canvas {
-      margin-bottom: 32 * $MBS;
+    &__canvasWrapper {
+      margin-bottom: 128 * $MBS;
     }
 
     &__report {
@@ -222,8 +300,8 @@
 
 @media #{$BreakpointS} {
   .result {
-    &__canvas {
-      margin-bottom: 32 * $SBS;
+    &__canvasWrapper {
+      margin-bottom: 128 * $SBS;
     }
 
     &__report {
@@ -271,8 +349,8 @@
 
 @media #{$BreakpointXS} {
   .result {
-    &__canvas {
-      margin-bottom: 32 * $XSBS;
+    &__canvasWrapper {
+      margin-bottom: 128 * $XSBS;
     }
 
     &__report {
