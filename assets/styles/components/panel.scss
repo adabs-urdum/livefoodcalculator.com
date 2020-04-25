@@ -1,0 +1,290 @@
+.panel {
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding: $BS * 32;
+    background: $White;
+  }
+
+  &__species {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__formRow {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-bottom: $BS * 16;
+  }
+
+  &__labelText {
+    display: inline-block;
+    min-width: $BS * 350;
+  }
+
+  &__formInput {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: $White;
+    background-color: $YellowDark;
+    padding: $BS * 8;
+    border: none;
+    border-radius: none;
+    max-width: 100%;
+
+    &:focus {
+      outline: solid $BS*4 $Black;
+    }
+
+    &[type="number"] {
+      width: $BS * 80;
+    }
+
+    &[type="text"] {
+      width: $BS * 300;
+    }
+  }
+
+  &__row {
+    margin-bottom: $BS * 64;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__title {
+    margin-bottom: $BS * 8;
+  }
+
+  &__description {
+    @include bs-font-size(20);
+    line-height: 100%;
+    margin-bottom: $BS * 32;
+  }
+}
+
+@media #{$BreakpointMAX} {
+  .panel {
+    &__form {
+      padding: 32px;
+    }
+
+    &__label {
+      margin-bottom: 16px;
+    }
+
+    &__labelText {
+      min-width: 350px;
+    }
+
+    &__formInput {
+      padding: 8px;
+
+      &:focus {
+        outline-width: 4px;
+      }
+
+      &[type="number"] {
+        width: 80px;
+      }
+
+      &[type="text"] {
+        width: 300px;
+      }
+    }
+
+    &__row {
+      margin-bottom: 64px;
+    }
+
+    &__description {
+      @include bs-font-size-max(20);
+      margin-bottom: 32px;
+    }
+  }
+}
+
+@media #{$BreakpointL} {
+  .panel {
+    &__form {
+      padding: 32 * $LBS;
+    }
+
+    &__label {
+      margin-bottom: 16 * $LBS;
+    }
+
+    &__labelText {
+      min-width: 250 * $LBS;
+    }
+
+    &__formInput {
+      padding: 8 * $LBS;
+
+      &:focus {
+        outline-width: 4 * $LBS;
+      }
+
+      &[type="number"] {
+        width: 80 * $LBS;
+      }
+
+      &[type="text"] {
+        width: 300 * $LBS;
+      }
+    }
+
+    &__row {
+      margin-bottom: 64 * $LBS;
+    }
+
+    &__description {
+      @include bs-font-size-l(20);
+      margin-bottom: 32 * $LBS;
+    }
+  }
+}
+
+@media #{$BreakpointM} {
+  .panel {
+    &__form {
+      padding: 32 * $MBS;
+    }
+
+    &__label {
+      margin-bottom: 16 * $MBS;
+    }
+
+    &__labelText {
+      min-width: 250 * $MBS;
+    }
+
+    &__formInput {
+      padding: 8 * $MBS;
+
+      &:focus {
+        outline-width: 4 * $MBS;
+      }
+
+      &[type="number"] {
+        width: 80 * $MBS;
+      }
+
+      &[type="text"] {
+        width: 300 * $MBS;
+      }
+    }
+
+    &__formRow {
+      margin-bottom: $MBS * 32;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &__row {
+      flex-direction: column;
+      margin-bottom: 64 * $MBS;
+    }
+
+    &__description {
+      @include bs-font-size-m(20);
+      margin-bottom: 32 * $MBS;
+    }
+  }
+}
+
+@media #{$BreakpointS} {
+  .panel {
+    &__form {
+      padding: 32 * $SBS;
+    }
+
+    &__label {
+      margin-bottom: 16 * $SBS;
+    }
+
+    &__labelText {
+      min-width: 250 * $SBS;
+    }
+
+    &__formInput {
+      padding: 8 * $SBS;
+
+      &:focus {
+        outline-width: 4 * $SBS;
+      }
+
+      &[type="number"] {
+        width: 80 * $SBS;
+      }
+
+      &[type="text"] {
+        width: 300 * $SBS;
+      }
+    }
+
+    &__formRow {
+      margin-bottom: $SBS * 32;
+    }
+
+    &__row {
+      margin-bottom: 64 * $SBS;
+    }
+
+    &__description {
+      @include bs-font-size-s(20);
+      margin-bottom: 32 * $SBS;
+    }
+  }
+}
+
+@media #{$BreakpointXS} {
+  .panel {
+    &__form {
+      padding: 32 * $XSBS;
+    }
+
+    &__label {
+      margin-bottom: 16 * $XSBS;
+    }
+
+    &__labelText {
+      min-width: 250 * $XSBS;
+    }
+
+    &__formInput {
+      padding: 8 * $XSBS;
+
+      &:focus {
+        outline-width: 4 * $XSBS;
+      }
+
+      &[type="number"] {
+        width: 80 * $XSBS;
+      }
+
+      &[type="text"] {
+        width: 100%;
+      }
+    }
+
+    &__formRow {
+      margin-bottom: $XSBS * 32;
+    }
+
+    &__row {
+      margin-bottom: 64 * $XSBS;
+    }
+
+    &__description {
+      @include bs-font-size-xs(20);
+      margin-bottom: 32 * $XSBS;
+    }
+  }
+}

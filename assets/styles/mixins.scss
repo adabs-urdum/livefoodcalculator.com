@@ -1,0 +1,27 @@
+@mixin bs-font-size($value) {
+  font-size: calc(1rem + #{$BS} * #{$value} - #{$BaseRemSize} * 1px);
+}
+
+@mixin bs-font-size-l($value) {
+  font-size: calc(1rem + #{$LBS} * #{$value} - #{$BaseRemSize} * 1px);
+}
+
+@mixin bs-font-size-m($value) {
+  font-size: calc(1rem + #{$MBS} * #{$value} - #{$BaseRemSize} * 1px);
+}
+
+@mixin bs-font-size-s($value) {
+  font-size: calc(1rem + #{$SBS} * #{$value} - #{$BaseRemSize} * 1px);
+}
+
+@mixin bs-font-size-xs($value) {
+  font-size: calc(1rem + #{$XSBS} * #{$value} - #{$BaseRemSize} * 1px);
+}
+
+@mixin bs-font-size-max($value) {
+  font-size: calc(1rem + #{$value} * 1px - #{$BaseRemSize} * 1px);
+}
+
+@mixin bs-font-size-mobile($value) {
+  font-size: calc(1rem + #{$MBS} * #{$value} - #{$BaseRemSize} * 1px);
+}

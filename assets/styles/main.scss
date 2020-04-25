@@ -1,0 +1,11 @@
+@import 'normalize';
+@import 'variables';
+@import 'fonts';
+@import 'mixins';
+@import 'general';
+
+@import './components/panel.scss';
+@import './components/result.scss';
+@import './components/infoPanel.scss';
+@import './components/header.scss';
+@import './components/presets.scss';

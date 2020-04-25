@@ -1,0 +1,344 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 300;
+  font-size: #{$BaseRemSize}px;
+  line-height: 120%;
+  color: $Black;
+  background: $Yellow;
+}
+
+body {
+  @include bs-font-size(28);
+  line-height: 130%;
+}
+
+main {
+  padding: $BS * 64;
+}
+
+section {
+  margin-bottom: $BS * 128;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  line-height: 120%;
+  font-weight: 700;
+}
+
+h1 {
+  @include bs-font-size(62);
+}
+
+h2 {
+  @include bs-font-size(44);
+}
+
+h3 {
+  @include bs-font-size(36);
+  margin-bottom: $BS * 32;
+}
+
+h4 {
+  @include bs-font-size(26);
+}
+
+h5,
+h6 {
+  @include bs-font-size(20);
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+img,
+canvas {
+  display: block;
+}
+
+button,
+.button {
+  font-family: 'Roboto Condensed', sans-serif;
+  position: relative;
+  display: inline-block;
+  background: $Black;
+  padding: $BS*11 $BS*22 $BS*10;
+  color: $Yellow;
+  transition: color 0.2s ease-out, background-color 0.2s ease-out;
+  text-transform: uppercase;
+  animation-delay: 0.3s;
+  z-index: 5;
+  outline: none;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+
+  &.active {
+    background: $YellowDark;
+  }
+
+  &:hover {
+    color: $YellowDark;
+    background: $Black;
+  }
+}
+
+.desktop_only {
+  display: block;
+}
+
+.mobile_only {
+  display: none;
+}
+
+@media #{$BreakpointMAX} {
+  html {
+    @include bs-font-size-max($BaseRemSize);
+  }
+
+  body {
+    @include bs-font-size-max(28);
+  }
+
+  main {
+    padding: 64px;
+    max-width: $ScreendesignWidthMAX + 0px;
+    margin: 0 auto;
+  }
+
+  section {
+    margin-bottom: 128px;
+  }
+
+  h1 {
+    @include bs-font-size-max(62);
+  }
+
+  h2 {
+    @include bs-font-size-max(44);
+  }
+
+  h3 {
+    @include bs-font-size-max(36);
+    margin-bottom: 32px;
+  }
+
+  h4 {
+    @include bs-font-size-max(26);
+  }
+
+  h5,
+  h6 {
+    @include bs-font-size-max(20);
+  }
+
+  button,
+  .button {
+    padding: 11px 22px 10px;
+  }
+}
+
+@media #{$BreakpointL} {
+  html {
+    @include bs-font-size-l($BaseRemSize);
+  }
+
+  body {
+    @include bs-font-size-l(26);
+  }
+
+  main {
+    padding: 64 * $LBS;
+  }
+
+  section {
+    margin-bottom: 128 * $LBS;
+  }
+
+  h1 {
+    @include bs-font-size-l(62);
+  }
+
+  h2 {
+    @include bs-font-size-l(44);
+  }
+
+  h3 {
+    @include bs-font-size-l(36);
+    margin-bottom: 32 * $LBS;
+  }
+
+  h4 {
+    @include bs-font-size-l(26);
+  }
+
+  h5,
+  h6 {
+    @include bs-font-size-l(20);
+  }
+
+  button,
+  .button {
+    padding: 11 * $LBS 22 * $LBS 10 * $LBS;
+  }
+}
+
+@media #{$BreakpointM} {
+  html {
+    @include bs-font-size-m($BaseRemSize);
+  }
+
+  body {
+    @include bs-font-size-m(26);
+  }
+
+  main {
+    padding: 32 * $MBS;
+  }
+
+  section {
+    margin-bottom: 128 * $MBS;
+  }
+
+  h1 {
+    @include bs-font-size-m(62);
+  }
+
+  h2 {
+    @include bs-font-size-m(44);
+  }
+
+  h3 {
+    @include bs-font-size-m(36);
+    margin-bottom: 32 * $MBS;
+  }
+
+  h4 {
+    @include bs-font-size-m(26);
+  }
+
+  h5,
+  h6 {
+    @include bs-font-size-m(20);
+  }
+
+  button,
+  .button {
+    padding: 11 * $MBS 22 * $MBS 10 * $MBS;
+  }
+}
+
+@media #{$BreakpointS} {
+  html {
+    @include bs-font-size-s($BaseRemSize);
+  }
+
+  body {
+    @include bs-font-size-s(26);
+  }
+
+  main {
+    padding: 32 * $SBS;
+  }
+
+  section {
+    margin-bottom: 128 * $SBS;
+  }
+
+  h1 {
+    @include bs-font-size-s(62);
+  }
+
+  h2 {
+    @include bs-font-size-s(44);
+  }
+
+  h3 {
+    @include bs-font-size-s(36);
+    margin-bottom: 32 * $SBS;
+  }
+
+  h4 {
+    @include bs-font-size-s(26);
+  }
+
+  h5,
+  h6 {
+    @include bs-font-size-s(20);
+  }
+
+  button,
+  .button {
+    padding: 11 * $SBS 22 * $SBS 10 * $SBS;
+  }
+}
+
+@media #{$BreakpointXS} {
+  html {
+    @include bs-font-size-xs($BaseRemSize);
+  }
+
+  body {
+    @include bs-font-size-xs(26);
+  }
+
+  main {
+    padding: 32 * $XSBS;
+  }
+
+  section {
+    margin-bottom: 128 * $XSBS;
+  }
+
+  h1 {
+    @include bs-font-size-xs(62);
+  }
+
+  h2 {
+    @include bs-font-size-xs(44);
+  }
+
+  h3 {
+    @include bs-font-size-xs(36);
+    margin-bottom: 32 * $XSBS;
+  }
+
+  h4 {
+    @include bs-font-size-xs(26);
+  }
+
+  h5,
+  h6 {
+    @include bs-font-size-xs(20);
+  }
+
+  button,
+  .button {
+    padding: 11 * $XSBS 22 * $XSBS 10 * $XSBS;
+  }
+}
