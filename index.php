@@ -90,7 +90,7 @@
       gtag('config', 'UA-143821656-3');
     </script>
   </head>
-  <link rel="stylesheet" href="./dist/css/styles.min.css?v=1" />
+  <link rel="stylesheet" href="./dist/css/styles.min.css?v=2" />
   <body>
     <main>
       <header class="header">
@@ -101,8 +101,9 @@
       </header>
       <section class="intro">
         <div class="intro__text">
+          <p>Wie wahrscheinlich ist es, dass meine Zuchtanlage 2 Jahre erfolgreich überlebt und produziert, wenn ich jede Woche 20 Futtertiere brauche und mit einem Zuchtansatz von 30 anfange? Mit dieser Prämisse habe ich dieses Tool gebaut.</p>
           <p>
-            Dieser Rechner ist eher zur Unterhaltung gedacht und simuliert auf wissenschaftlich weder fundierte, noch haltbare Art und Weise, wie ein Lebendfutter-Zuchtaufbau verlaufen könnte. Dabei werden Eigenschaften der zu vermehrenden Spezies als Parameter angegeben und der Code simuliert den Zuchtverlauf. Viele Dinge werden nicht berücksichtigt, wie z.B. dass Tiere mal älter, mal weniger alt werden, als ihre Lebenserwartung. In diesem Rechner haben sie ab dem Erreichen der Lebenserwartung jede Woche eine 50/50 Chance weiterzuleben. Ich bin weder Mathematiker noch Biologe. Mit mehreren Simulationen kann man höchstens grobe Tendenzen erkennen, aber es werden dabei keine realen oder zuverlässige Zahlen errechnet.
+            Es simuliert auf wissenschaftlich weder fundierte, noch haltbare Art und Weise, wie sich eine Zuchtanlage in einer gewissen Zeitspanne verhalten könnte. Dabei werden Eigenschaften der zu vermehrenden Spezies als Parameter angegeben und der Code simuliert den Zuchtverlauf. Viele Dinge werden nicht berücksichtigt, wie z.B. dass Tiere mal älter, mal weniger alt werden, als ihre Lebenserwartung. In diesem Rechner haben sie ab dem Erreichen der Lebenserwartung jede Woche eine 50/50 Chance weiterzuleben. Ich bin weder Mathematiker noch Biologe. Mit mehreren Simulationen kann man höchstens grobe Tendenzen erkennen, aber es werden dabei vermutlich keine realen oder zuverlässige Zahlen errechnet.
           </p>
           <p>
             Deinem Prozessor und der Ladezeit zuliebe werden Simulationen ab einer Populationsgrösse von 1500 abgebrochen.
@@ -150,7 +151,7 @@
                 <span class="panel__unit">Wochen</span>
               </label>
               <label class="panel__label" for="form__wearingTime">
-                <span class="panel__labelText">Tragezeit</span>
+                <span class="panel__labelText">Trage-/Schlüpfzeit</span>
                 <input
                   id="formSpecies__wearingTime"
                   class="panel__formInput"
@@ -286,7 +287,7 @@
             Wochen
           </label>
           <div>
-            <input type="submit" class="button panel__row" value="simulieren" />
+            <input type="submit" class="button panel__row" value="starten" />
           </div>
         </form>
       </section>
@@ -313,7 +314,10 @@
         <h3>Populationskurve</h3>
         <div class="result__canvasWrapper">
           <div class="result__canvasControls">
-            <button class="button" id="buttonRunSimulation">simulieren</button>
+            <div>
+              <button class="button" id="buttonRunSimulation">starten</button>
+              <button class="button" id="buttonRunSimulationMulti">3x starten</button>
+            </div>
             <span id="result__clearCanvas" class="result__clearCanvas button">reset</span>
           </div>
           <canvas
@@ -326,19 +330,19 @@
         <input class="result__showReports" type="checkbox" id="showResultReports">
         <div id="resultReport" class="result__text">
           <h3>Analyse</h3>
-          <h4><span id="resultText__quota"></span>% Erfolgsquote</h4>
+          <h4>Dieses Setup hat in <span id="resultText__quota"></span>% der Fälle erfolgreich funktioniert.</h4>
           <p>Dieser Bericht setzt sich aus den Durchschnittswerten von <span id="resultText__rounds"></span> Durchgängen zusammen.</p>
           <p><span class="result__grounded" id="resultText__grounded"></span> der Simulationsdurchgänge sind zu Grunde gegangen und ausgestorben.</p>
           <ul>
-            <li>Dieses Setup hat <span id="resultText__weeks"></span> Wochen bestanden.</li>
+            <li>Dieses Setup hat <span id="resultText__weeks"></span> Wochen überstanden.</li>
             <li>Der maximale Bestand lag bei <span id="resultText__maxPopulation"></span>.</li>
             <li>Am Ende der Zeit waren noch <span id="resultText__remaining"></span> übrig.</li>
             <li><span id="resultText__females"></span> Weibchen, <span id="resultText__femalesAdult"></span> davon adult, <span id="resultText__males"></span> Männchen, <span id="resultText__malesAdult"></span> davon adult.</li>
             <li>Das Zeitliche gesegnet, ohne verfüttert zu werden, haben <span id="resultText__dead"></span> Individuen.</li>
             <li>Es gelangen <span id="resultText__offspring"></span> Nachzuchten.</li>
+            <li><span id="resultText__fed"></span> Exemplare endeten als Futter.</li>
             <li>Während <span id="resultText__missingGender"></span> Wochen gab es keinen Nachwuchs, weil keine adulten Tiere von beiden Geschlechtern zugegen waren.</li>
             <li><span id="resultText__missingOffspring"></span> Wochen gab es zu wenig Ausbeute, um den Bedarf zu decken.</li>
-            <li><span id="resultText__fed"></span> Exemplare endeten als Futter.</li>
           </ul>
           <h4>Sammle mehr Datensätze für ein aussagekräfrigeres Resultat.</h4>
         </div>
@@ -348,6 +352,6 @@
         <div id="result__report" class="result__report"></div>
       </section>
     </main>
-    <script src="./dist/js/functions.min.js?v=1"></script>
+    <script src="./dist/js/functions.min.js?v=3"></script>
   </body>
 </html>

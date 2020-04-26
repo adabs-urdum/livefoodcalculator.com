@@ -9,6 +9,9 @@ class LiveFoodCalculator {
     this.species = [...document.getElementsByClassName("panel__species")];
     this.clearCanvasButton = document.getElementById("result__clearCanvas");
     this.buttonRunSimulation = document.getElementById("buttonRunSimulation");
+    this.buttonRunSimulationMulti = document.getElementById(
+      "buttonRunSimulationMulti"
+    );
     this.resultReport = document.getElementById("resultReport");
 
     this.speciesObjects = [];
@@ -49,6 +52,11 @@ class LiveFoodCalculator {
       "click",
       this.onFormSpeciesSubmit
     );
+    this.buttonRunSimulationMulti.addEventListener("click", (e) => {
+      this.onFormSpeciesSubmit();
+      this.onFormSpeciesSubmit();
+      this.onFormSpeciesSubmit();
+    });
     document
       .getElementById("formSpecies__timespan")
       .addEventListener("change", this.onClickClearCanvasButton);
@@ -451,7 +459,7 @@ class LiveFoodCalculator {
                 ? "result__reportRow--bad"
                 : ""
             }">
-              <span>Wochen mit zu weniger Ertrag, als gebraucht:</span> ${
+              <span>Wochen mit weniger Ertrag, als zur Verfütterung gebraucht:</span> ${
                 speciesObject.missingOffspring
               }</p>
             <p class="result__reportRow">
