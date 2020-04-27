@@ -365,6 +365,7 @@ class LiveFoodCalculator {
       });
     });
 
+    this.canvasEngine.ctx.lineWidth = 8;
     this.canvasEngine.ctx.beginPath();
     this.canvasEngine.ctx.strokeStyle = this.colorGenerator.rgbToHex(
       this.colorGenerator.colors[this.colorGenerator.currentColorKey]

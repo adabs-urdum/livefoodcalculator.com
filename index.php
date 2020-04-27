@@ -352,6 +352,6 @@
         <div id="result__report" class="result__report"></div>
       </section>
     </main>
-    <script src="./dist/js/functions.min.js?v=3"></script>
+    <script src="./dist/js/functions.min.js?v=5"></script>
   </body>
 </html>
